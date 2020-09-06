@@ -15,3 +15,5 @@ bin/mill mill.scalalib.GenIdea/idea
 bin/mill example.run
 ```
 
+If you have problem downloading the mill binary, you may try my [mirror](https://share.weiyun.com/8Bt4HH6k).
+Manually download it and save it to `$HOME/.cache/mill/download`.
