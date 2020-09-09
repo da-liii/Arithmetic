@@ -2,6 +2,7 @@ package arithmetic
 
 import org.antlr.v4.runtime.tree.{ParseTree, TerminalNode}
 
+import scala.reflect.ClassTag
 import scala.collection.immutable.Queue
 import ParseTreeOps._
 import arithmetic.antlr.ArithmeticParser.{ScientificContext, VariableContext}
@@ -34,6 +35,15 @@ final class ParseTreeOps(tree: ParseTree) extends AbstractParseTreeOps {
   override def find(predicate: ParseTree => Boolean): Option[ParseTree] = {
     ???
   }
+
+  override def collectFirst[T](partialFunction: PartialFunction[ParseTree, T]): T = {
+    ???
+  }
+
+  override def collectFirstAs[T](implicit classTag: ClassTag[T]): T = {
+    ???
+  }
+
 
   // Predicates
 

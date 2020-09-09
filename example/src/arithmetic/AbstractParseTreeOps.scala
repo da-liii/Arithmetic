@@ -1,6 +1,7 @@
 package arithmetic
 
 import org.antlr.v4.runtime.tree.ParseTree
+import scala.reflect.ClassTag
 
 trait AbstractParseTreeOps {
 
@@ -17,6 +18,11 @@ trait AbstractParseTreeOps {
   def count(predicate: ParseTree => Boolean): Int = 0
 
   def find(predicate: ParseTree => Boolean): Option[ParseTree] = None
+
+  def collectFirst[T](partialFunction: PartialFunction[ParseTree, T]): T = ???
+
+  def collectFirstAs[T](implicit classTag: ClassTag[T]): T = ???
+
 
   def isTerminalNode: Boolean = false
 
