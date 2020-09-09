@@ -1,7 +1,7 @@
 # Arithmetic
 
 ## Scala Meetup
-Only LPAREN/RPAREN/PLUS/atom is allowed.
+Here is the [slides](slides.md) and the corresponding [video](https://www.bilibili.com/video/BV1Qa4y1L7dj) @ 131:00.
 
 ## Cheatsheet
 ```
