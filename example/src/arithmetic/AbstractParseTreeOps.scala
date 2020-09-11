@@ -19,9 +19,9 @@ trait AbstractParseTreeOps {
 
   def find(predicate: ParseTree => Boolean): Option[ParseTree] = None
 
-  def collectFirst[T](partialFunction: PartialFunction[ParseTree, T]): T = ???
+  def collectFirst[T](partialFunction: PartialFunction[ParseTree, T]): Option[T] = ???
 
-  def collectFirstAs[T](implicit classTag: ClassTag[T]): T = ???
+  def collectFirstAs[T](implicit classTag: ClassTag[T]): Option[T] = ???
 
 
   def isTerminalNode: Boolean = false

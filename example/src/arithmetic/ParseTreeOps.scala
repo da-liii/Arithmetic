@@ -36,11 +36,11 @@ final class ParseTreeOps(tree: ParseTree) extends AbstractParseTreeOps {
     ???
   }
 
-  override def collectFirst[T](partialFunction: PartialFunction[ParseTree, T]): T = {
+  override def collectFirst[T](partialFunction: PartialFunction[ParseTree, T]): Option[T] = {
     ???
   }
 
-  override def collectFirstAs[T](implicit classTag: ClassTag[T]): T = {
+  override def collectFirstAs[T](implicit classTag: ClassTag[T]): Option[T] = {
     ???
   }
 
