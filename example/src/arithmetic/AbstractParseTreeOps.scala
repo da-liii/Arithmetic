@@ -27,7 +27,9 @@ trait AbstractParseTreeOps {
 
   def collectChildren(): Seq[ParseTree] = ???
 
+  // bfs is used as the default traverse order above
   def bfs(): Stream[ParseTree] = ???
 
+  // dfs is used in some special cases
   def dfs(): Stream[ParseTree] = ???
 }
