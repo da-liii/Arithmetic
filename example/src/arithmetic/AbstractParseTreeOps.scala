@@ -11,28 +11,23 @@ trait AbstractParseTreeOps {
 
   def filter(f: ParseTree => Boolean): Stream[ParseTree] = ???
 
-  def exists(predicate: ParseTree => Boolean): Boolean = false
+  def filterNot(f: ParseTree => Boolean): Stream[ParseTree] = ???
 
-  def forall(predicate: ParseTree => Boolean): Boolean = false
+  def exists(predicate: ParseTree => Boolean): Boolean = ???
 
-  def count(predicate: ParseTree => Boolean): Int = 0
+  def forall(predicate: ParseTree => Boolean): Boolean = ???
 
-  def find(predicate: ParseTree => Boolean): Option[ParseTree] = None
+  def count(predicate: ParseTree => Boolean): Int = ???
+
+  def find(predicate: ParseTree => Boolean): Option[ParseTree] = ???
 
   def collectFirst[T](partialFunction: PartialFunction[ParseTree, T]): Option[T] = ???
 
   def collectFirstAs[T](implicit classTag: ClassTag[T]): Option[T] = ???
 
+  def collectChildren(): Seq[ParseTree] = ???
 
-  def isTerminalNode: Boolean = false
+  def bfs(): Stream[ParseTree] = ???
 
-  def isRootNode: Boolean = false
-
-  def isParenthesized: Boolean = false
-
-  def isScientific: Boolean = false
-
-  def containPlusOp: Boolean = false
-
-  def containNoVariable: Boolean = false
+  def dfs(): Stream[ParseTree] = ???
 }

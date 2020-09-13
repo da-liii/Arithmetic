@@ -1,11 +1,10 @@
 package arithmetic
 
-import org.antlr.v4.runtime.tree.{ParseTree, TerminalNode}
+import org.antlr.v4.runtime.tree.ParseTree
 
 import scala.reflect.ClassTag
 import scala.collection.immutable.Queue
 import ParseTreeOps._
-import arithmetic.antlr.ArithmeticParser.{ScientificContext, VariableContext}
 
 final class ParseTreeOps(tree: ParseTree) extends AbstractParseTreeOps {
   override def foreach[U](f: ParseTree => U): Unit = {
@@ -17,6 +16,10 @@ final class ParseTreeOps(tree: ParseTree) extends AbstractParseTreeOps {
   }
 
   override def filter(f: ParseTree => Boolean): Stream[ParseTree] = {
+    ???
+  }
+
+  override def filterNot(f: ParseTree => Boolean): Stream[ParseTree] = {
     ???
   }
 
@@ -44,48 +47,15 @@ final class ParseTreeOps(tree: ParseTree) extends AbstractParseTreeOps {
     ???
   }
 
-
-  // Predicates
-
-  override def isTerminalNode: Boolean = {
-    tree match {
-      case _: TerminalNode =>
-        true
-      case _ =>
-        false
-    }
+  override def collectChildren(): Seq[ParseTree] = {
+    ???
   }
 
-  override def isParenthesized: Boolean = {
-    tree.getChild(0).isInstanceOf[TerminalNode] &&
-      tree.getChild(tree.getChildCount-1).isInstanceOf[TerminalNode] &&
-      "(".equals(tree.getChild(0).getText) &&
-      ")".equals(tree.getChild(tree.getChildCount-1).getText)
+  override def dfs(): Stream[ParseTree] = {
+    ???
   }
 
-  override def isScientific: Boolean = {
-    tree match {
-      case _: ScientificContext =>
-        true
-      case _ =>
-        false
-    }
-  }
-
-  override def containPlusOp: Boolean = {
-    tree.exists(node => "+".equals(node.getText))
-  }
-
-  override def containNoVariable: Boolean = {
-    !tree.exists {
-      case _ :VariableContext =>
-        true
-      case _ =>
-        false
-    }
-  }
-
-  private def allNodes(): Stream[ParseTree] = {
+  override def bfs(): Stream[ParseTree] = {
     ???
   }
 }

@@ -12,51 +12,57 @@ class MeetupTest extends AnyFunSuite with Matchers {
       .replace("Impl", "")
   }
 
-  test("Demo 1: bfs traverse of `1 + a + 2`") {
-    val lazyTree = LazyTree("1 + a + 2")
-    lazyTree.expression().foreach { node =>
-      println(s"${beautifyName(node)} [${lazyTree.extractViaTree(_ => node)}]")
-    }
-  }
-
-  test("Demo 2: validate") {
-    Meetup.validate("1 + 1") should be (true)
-    Meetup.validate("1 - a") should be (false)
-  }
-
-  def showParenthesizing(text: String): Unit = {
-    println("<-- Original Text")
-    println(text)
-    println("--> Original Text\n")
-
-    println("<-- Replaced")
-    println(Meetup.parenthesize(text))
-    println("--> Replaced\n\n")
-  }
-
-  test("Demo 3: parenthesize") {
-    showParenthesizing("1 + a + 2")
-    showParenthesizing("(1 + a + 2)")
-    showParenthesizing("((1 + a) + 2)")
-  }
-
-  def showEvaluate(text: String): Unit = {
+  def show(text: String)(f: String => String): Unit = {
     println("<-- Original Text")
     println(text)
     println("--> Original Text\n")
 
     println("<-- Evaluated")
-    println(Meetup.evaluate(text))
+    println(f(text))
     println("--> Evaluated\n\n")
   }
 
-  test("Demo 4: evaluate") {
-    showEvaluate("(a + 1) + 2")
-    showEvaluate("a + (1 + 2)")
-    showEvaluate("(1+2)+(3+4)+(a + b)")
+
+  ignore("Demo 1: bfs traverse of `1 + a + 2`") {
+    val lazyTree = LazyTree("1 + a + 2")
+    lazyTree.expression().foreach { node =>
+      println(s"${beautifyName(node)} [${lazyTree.extractViaTree(node)}]")
+    }
   }
 
-  test("Demo 5: calculator") {
+  ignore("Demo 2: validate") {
+    Meetup.validate("1 + 1") should be (true)
+    Meetup.validate("1 - a") should be (false)
+  }
+
+  ignore("Demo 3: parenthesize") {
+    show("1 + a + 2")(Meetup.parenthesize)
+    show("(1 + a + 2)")(Meetup.parenthesize)
+    show("((1 + a) + 2)")(Meetup.parenthesize)
+  }
+
+  ignore("Demo 4: evaluate") {
+    show("(a + 1) + 2")(Meetup.evaluate)
+    show("a + (1 + 2)")(Meetup.evaluate)
+    show("(1+2)+(3+4)+(a + b)")(Meetup.evaluate)
+  }
+
+  ignore("Demo 5: commutate") {
+    show("((1 + a) + 2)")(Meetup.commutate)
+    show("(1 + (a + 2))")(Meetup.commutate)
+    show("((a + 1) + 2)")(Meetup.commutate)
+    show("(1 + (2 + a))")(Meetup.commutate)
+  }
+
+  ignore("Demo 6: associate") {
+    show("(((3+a)+b)+c)")(Meetup.associate)
+    show("((a + 1) + 2)")(Meetup.associate)
+    show("(2 + (1 + a))")(Meetup.associate)
+  }
+
+  test("Demo 7: calculator") {
     Meetup.calculator("(1+2) + (3+4) + 5")
+    Meetup.calculator("1 + a + 2")
+    Meetup.calculator("1 + a + 2 + b + 3 + c + 4")
   }
 }

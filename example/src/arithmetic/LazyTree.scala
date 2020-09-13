@@ -2,13 +2,13 @@ package arithmetic
 
 import arithmetic.antlr.{ArithmeticLexer, ArithmeticParser}
 import org.antlr.v4.runtime.tree.ParseTree
-import org.antlr.v4.runtime.{CharStreams, CommonTokenStream, TokenStreamRewriter}
+import org.antlr.v4.runtime._
 import arithmetic.ParseTreeOps._
 
 case class LazyTree(text: String) {
-  lazy val lexer       = new ArithmeticLexer(CharStreams.fromString(text))
-  lazy val tokenStream = new CommonTokenStream(lexer)
-  lazy val parser      = new ArithmeticParser(tokenStream)
+  val lexer       = new ArithmeticLexer(CharStreams.fromString(text))
+  val tokenStream = new CommonTokenStream(lexer)
+  val parser = new ArithmeticParser(tokenStream)
 
   def expression(): AbstractParseTreeOps = {
     parser.expression()
@@ -18,13 +18,14 @@ case class LazyTree(text: String) {
     parser.getTokenStream.getText(tree.getSourceInterval)
   }
 
+
   def extractViaTree(tree: ParseTree): String = {
     extractText(parser, tree)
   }
 
-  def extractViaTree(locate: LazyTree => ParseTree): String = {
-    val tree = locate(this)
-    extractText(parser, tree)
+  def extractViaTree(locate: LazyTree => Option[ParseTree]): Option[String] = {
+    val treeOption = locate(this)
+    treeOption.map(tree => extractText(parser, tree))
   }
 
   def rewriteTree(source: ParseTree, target: String): String = {
